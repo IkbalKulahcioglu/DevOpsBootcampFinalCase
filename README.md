@@ -54,8 +54,9 @@ Nasıl Kullanılır
 Terraform kısmını çalıştırıp çalışan image'ı görmek için aşağıdaki adımları takip edebilirsiniz. Öncelikle, Terraform komutlarını çalıştırmadan önce AWS hesabınızda gerekli izinlere sahip olduğunuzdan emin olun.
 
 - `terraform init:` Terraform projesini başlatır ve bağımlılıkları yükler.
--`terraform plan:` Değişiklikleri görselleştirmek için bir plan oluşturur.
--`terraform apply:` Değişiklikleri uygular ve AWS altyapısını oluşturur.
+- `terraform plan:` Değişiklikleri görselleştirmek için bir plan oluşturur.
+- `terraform apply:` Değişiklikleri uygular ve AWS altyapısını oluşturur.
+
 Bu adımları takip ettikten sonra, Terraform çıktısında belirtilen URL'yi kullanarak uygulamanızı görüntüleyebilirsiniz.
 
 ## AWS ECS ve EKS Farkları
