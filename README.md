@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# React.js App Projesi
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bu proje, basit bir React.js uygulamasını oluşturmayı, Docker ile en küçük boyutta bir imaj oluşturmayı ve AWS ile Terraform kullanarak ECS Fargate üzerine dağıtmayı içermektedir. Aynı zamanda Kubernetes üzerine de uygulamanın dağıtılması öngörülmektedir.
 
-## Available Scripts
+## Proje Yapısı
 
-In the project directory, you can run:
+Proje aşağıdaki ana bileşenleri içerir:
 
-### `npm start`
+- `react-app`: Temel React.js uygulamasının oluşturulduğu klasör.
+- `Dockerfile`: Docker imajını oluşturmak için kullanılan dosya.
+- `.gitlab-ci.yml`: GitLab CI/CD pipeline'ının tanımlandığı dosya.
+- `terraform`: AWS altyapısını yönetmek için kullanılan Terraform konfigürasyon dosyalarını içerir.
+- `kubernetes`: Kubernetes üzerine uygulamanın dağıtılması için gerekli manifest dosyalarını içerir.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Dockerfile Açıklamaları
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Dockerfile, uygulamayı çalıştırmak için gerekli adımları içerir. Önemli noktalar şunlardır:
 
-### `npm test`
+- `FROM`: Uygulamanın temelini oluşturan bir başlangıç imajını belirtir.
+- `WORKDIR`: Çalışma dizinini belirtir.
+- `COPY`: Uygulama dosyalarını imaja kopyalar.
+- `RUN`: Gerekirse, uygulama bağımlılıklarını yükler.
+- `CMD`: Uygulamanın nasıl başlatılacağını belirtir.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## GitLab CI/CD Açıklamaları
 
-### `npm run build`
+GitLab CI/CD pipeline'ı, uygulamanın her aşamasını otomatikleştirmek için kullanılır. Aşamalar şunlardır:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `build`: Docker imajını oluşturur.
+- `test`: Uygulama testlerini çalıştırır.
+- `deploy`:Docker imajı belirtilen Docker Container Registry'e ($DOCKER_REGISTRY) yüklenir
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## AWS Altyapısı
 
-### `npm run eject`
+AWS altyapısı Terraform kullanılarak oluşturulur. Aşağıdaki bileşenleri içerir:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `VPC`: Uygulamanın çalışacağı sanal özel bulut.
+- `Security Group`: Güvenlik grupları, gerekli ağ kurallarını tanımlar.
+- `ECS Cluster`: ECS Fargate üzerine uygulamanın dağıtılacağı küme.
+- `Application Load Balancer`: Servis önünde konumlandırılan yük dengeleyici.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Kubernetes Dağıtımı
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Kubernetes üzerine uygulamanın dağıtılması için `kubernetes` klasörü içindeki manifest dosyaları kullanılır. Bu dosyalar, servis ve deployment Kubernetes nesnelerini tanımlar.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Nasıl Kullanılır
 
-## Learn More
+Terraform kısmını çalıştırıp çalısan image'ı görmek için aşağıdaki adımları çalıştırın ve output olarak verilen linkten bağlanıp görebilirsiniz. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. terraform init
+2. terraform plan
+3. terraform apply
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
