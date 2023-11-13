@@ -2,6 +2,9 @@
 
 Bu proje, basit bir React.js uygulamasını oluşturmayı, Docker ile en küçük boyutta bir imaj oluşturmayı ve AWS ile Terraform kullanarak ECS Fargate üzerine dağıtmayı içermektedir. Aynı zamanda Kubernetes üzerine de uygulamanın dağıtılması öngörülmektedir.
 
+Projeye giLab üzeriden erışmek için:
+https://gitlab.com/ikbalklhc/DevOpsBootcampFinalCase.git
+
 ## Proje Yapısı
 
 Proje aşağıdaki ana bileşenleri içerir:
